@@ -8,25 +8,15 @@ import cv2
 
 print("Type filename")
 filename = input(":")
-print(" ")
-print("Type psm (from 0-13)")
-PSM = int(input(":"))
-print(" ")
-print("Type oem (0-3)")
-OEM = int(input(":"))
-print(" ")
 
-myconfig = r"==psm PSM ==oem OEM"
+myconfig = r"==psm 2 ==oem 3"
 
 text = pytesseract.image_to_string(PIL.Image.open(filename), config=myconfig)
-#print(logos)
 
 img = cv2.imread(filename)
 height, width, channels = img.shape
 
 data = pytesseract.image_to_data(img, config = myconfig, output_type = Output.DICT)
-
-#print(data['logos'])
 
 amount_boxes = len(data['text'])
 for i in range(amount_boxes):
